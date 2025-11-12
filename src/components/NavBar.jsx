@@ -19,6 +19,7 @@ const NavBar = ({showLoginHandler,showLogout,logoutHandler}) => {
             <div><FaComments className="text-xl" /></div>
             <div><FaBell className="text-xl" /></div>
             <div><FaHeart className="text-xl" /></div>
+            
             {!showLogout ? <button className='login-button' onClick={showLoginHandler}>Login</button> : 
             <button className='logout-button' onClick={logoutHandler}>Logout</button>}
             
