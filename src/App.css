@@ -1,0 +1,722 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+  outline: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+html, body {
+  width: 100%;
+  overflow-x: hidden; /* horizontal scroll prevent */
+}
+/*Landing-Section*/
+.landingSection{
+  margin-top: 10vh;  
+  width: 100%;
+  box-sizing: border-box;  
+}
+.navSection{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  height: 10vh;
+  width: 100%;
+  background-color: #006494;
+  display: flex;
+  align-items: center;
+  color: rgb(255, 255, 255);
+  font-family: "Roboto", sans-serif;
+}
+.logo{
+  position: relative;
+  left: 55px;
+  font-size: 30px;
+  font-family: 'Times New Roman', Times, serif;
+  cursor: pointer;
+}
+.right-side{
+  position: absolute;
+  right: 55px;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+}
+.right-side > div {          /* icons container divs */
+  cursor: pointer;
+  transition: 0.3s easy;
+}
+.right-side > div:hover {
+  transform: scale(1.04);     /* slight enlarge */
+  color: #F4EBD9; 
+  transform: translateY(-1px) scale(1.02);  /* slight lift + enlarge */
+  box-shadow: 0 0px 0px;  /* color change on hover */
+}
+.login-button,.logout-button{
+  padding: 6px 15px;
+  font-size: 17px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  color: rgb(28, 115, 191);
+  font-weight: bold;
+}
+.login-button:hover{
+  background-color: #078215;
+  color: #ffffff;
+}
+.logout-button:hover{
+  background-color: #c91035;
+  color: #ffffff;
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgb(255, 255, 255);
+  padding: 5px 10px;
+  border-radius: 6px;
+  width: 250px;
+}
+.search-bar input {
+  display: inline-block;
+  border: none;
+  outline: none;
+  flex: 1;
+  background: none;
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+}
+.search-bar input::placeholder{
+  color: #ffffff;
+}
+.search-bar .search-icon {
+  color: rgb(255, 255, 255);
+  margin-left: 8px;
+  cursor: pointer;
+  display: block;
+}
+/*SideBar*/
+.sideBar {
+  position: fixed;
+  top: 10vh;
+  left: 0;
+  z-index: 90;
+  height: calc(100vh - 25vh);
+  width: 5%;  
+  background-color: #006494;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  margin-top: 35px;
+  margin-bottom: 35px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  box-sizing: border-box;
+}
+
+.sideBar-item {
+  position: relative;
+  margin: 20px 0;
+  font-size: 25px;
+  color: white;
+  cursor: pointer;
+}
+
+.sideBar-item:hover {
+  color: #F4EBD9;
+}
+
+.sideBar-item span {
+  position: absolute;
+  left: 60px;   /* icon pakka text */
+  top: 50%;
+  transform: translateY(-50%);
+  background: #006494;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.sideBar-item:hover span {
+  opacity: 1;
+}
+
+/*Intro*/
+.intro{
+  min-height: 40vh;   /* minimum space fix avthadi */
+  height: auto;       /* content ekkuva aithe adjust avuthadi */
+  padding: 20px;      /* breathing space */
+  display: flex;
+  flex-direction: column;  /* text + desc + buttons vertical ga arrange */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #F4EBD9;
+}
+.intro:hover{
+  background-color: #f5efdd;
+}
+.intro-card{
+  width: 100%;
+  max-width: 700px;   /* middle lo limit avthadi */
+  margin: 0 auto;
+  font-size: 30px;
+  text-align: center;
+  font-family: "Dancing Script", cursive;
+}
+.intro-card .description{
+  font-size: 15px;
+  margin-top: 10px;
+}
+.intro-buttons{
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+.intro-buttons button{
+  padding: 8px 15px;
+  font-size: 15px;
+  border-radius: 10px;
+  background-color: #006494;
+  color: #ffffff;
+}
+.intro-buttons button:hover{
+  transform: translateY(-1px) scale(1.02);  /* slight lift + enlarge */
+  box-shadow: 0 0px 0px;  /* color change on hover */
+}
+
+/*filterss*/
+.filter-bar {
+  display:flex;
+  justify-content:center;      /* center on big screens */
+  align-items:center;
+  gap:15px;
+  padding:15px 20px;
+  background-color:#F4EBD9;
+  border-bottom:1px solid #c3d8eb;
+  position:sticky;
+  top:10vh;
+  z-index:80;
+
+  /* no margin-left here */
+  width:100%; 
+  overflow-x:auto;
+  overflow-y:hidden;
+  white-space:nowrap;
+  -webkit-overflow-scrolling:touch;
+}
+
+.filter-bar::-webkit-scrollbar {
+  height: 6px;                /* small horizontal scrollbar */
+}
+
+.filter-bar button {
+  flex: 0 0 auto;             /* prevent shrink */
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #006494;
+  color: white;
+  transition: 0.3s ease;
+}
+
+
+.filter-bar button:hover {
+  background-color: #006494;
+  transform: translateY(-1px) scale(1.02);  /* slight lift + enlarge */
+  box-shadow: 0 0px 0px;
+}
+/*Menu*/
+.menu {
+  width: 100%;           
+  min-height: 100vh;
+  background-color: #F4EBD9;
+}
+.menu-content{
+  margin-top: 1%;
+  margin-left: 7%;
+  width: 90%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #F4EBD9;
+}
+.sub-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;  /* center lo align */
+}
+.card {
+  background: white;
+  width: 280px;
+  height: 280px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* animation */
+}
+.card:hover {
+  transform: translateY(-1px) scale(1.02);  /* slight lift + enlarge */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* stronger shadow */
+}
+
+/*mediaQueries*/
+
+@media screen and (min-width:1025px){
+  .smallNav {
+    display: none;
+  }
+}
+
+/* 1. Medium Screens (Tablets / Small Desktops) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .navSection .logo{
+    font-size: 25px;
+    left: 30px;
+  }
+  .navSection .right-side{
+    font-size: 20px;
+    right: 30px;
+    gap: 20px;
+  }
+  .navSection .login-button{
+    font-size: 13px;
+  }
+  .navSection .search-bar{
+    width: 210px;
+  }
+  .intro{
+    margin-top: -25px;
+    width: 100%;
+    max-width: 100%;
+  }
+  .intro-card{
+    width: 60%;
+  }
+  .intro-card h1{
+    font-size: 40px;
+  }
+  .intro-card .description{
+    font-size: 14px;
+  }
+  .intro-buttons button{
+    padding: 5px 12px;
+    font-size: 13px;
+  }
+  .filter-bar{
+    gap: 10px;
+    padding: 10px 15px;
+  }
+  .filter-bar button{
+    gap: 5px;
+    padding: 5px 10px;
+  }
+  .menu-content{
+    padding: 5px;
+  }
+  .sub-cards{
+    gap: 11px;
+  }
+  .card{
+    width: 220px;
+    height: 220px;
+  }
+  .smallNav {
+    display: none;
+  }
+}
+
+/* 2. Small Screens (Small Tablets) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .smallNav {
+    display: none;
+  }
+  .navSection .logo{
+    font-size: 20px;
+    left: 20px;
+  }
+  .navSection .right-side{
+    font-size: 20px;
+    right: 10px;
+    gap: 20px;
+  }
+  .navSection .login-button{
+    font-size: 11px;
+  }
+  .login-button{
+    padding: 5px 10px;
+  }
+  .search-bar input{
+    display: none;
+  }
+  .search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;       
+    border: none;     
+    padding: 0;        
+    background: transparent;
+  }
+  .search-bar .search-icon {
+    font-size: 19px;
+    cursor: pointer;
+  }
+  .sideBar-item{
+    font-size: 17px;
+  }
+  .intro{
+    margin-top: -25px;
+    width: 100%;
+    max-width: 100%;
+  }
+  .intro-card{
+    width: 70%;
+    
+  }
+  .intro-card h1{
+    font-size: 30px;
+  }
+  .intro-card .description{
+    font-size: 12px;
+  }
+  .intro-buttons button{
+    padding: 4px 10px;
+    font-size: 13px;
+  }
+  .filter-bar{
+    padding-right:40px;
+    margin-left:5%;             /* start after sidebar */
+    width:calc(100% - 5%);
+    justify-content:flex-start; /* left align items instead of center */
+  }
+  .filter-bar button{
+    gap: 5px;
+    padding: 5px 10px;
+  }
+  .filter-bar button:last-child {
+    margin-right:30px; /* extra margin for last button */
+  }
+  .menu{
+    width: 100%;
+    margin-top: -35px;
+  }
+  .menu-content{
+    padding: 3px;
+  }
+  .sub-cards{
+    gap: 8px;
+  }
+  .card{
+    width: 170px;
+    height: 170px;
+  }
+}
+
+/* 3. Extra Small Screens (Mobile) */
+@media (max-width: 480px) and (min-width: 279px) {
+  .navSection {
+    display: none;
+  }
+  .sideBar {
+    display: none;
+  }
+  .smallNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #006494;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: 5px 15px;
+    height: 8vh;
+    color: #fff;
+    font-family: "Roboto", sans-serif;
+    font-size: 25px;
+    z-index: 999;
+  }
+  .mobile-search {
+    color: #ffffff;
+  }
+  .intro {
+    margin: 0;                /* remove negative margins */
+    padding-top: 8vh;         /* smallNav height */
+    padding-bottom: 15px;
+    height: auto;             /* auto height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .intro-card {
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .intro-card h1 {
+    font-size: calc(16px + 2vw);
+  }
+
+  .intro-card .description {
+    font-size: calc(10px + 0.5vw);
+  }
+  .intro-buttons{
+    margin-top: 12px;
+  }
+  .intro-buttons button {
+    padding: 4px 10px;
+    font-size: calc(8px + 1vw);
+  }
+  .filter-bar{
+    position: sticky;
+    top: 8vh;        /* match smallNav height */
+    margin-top: 0;   /* remove negative margin */
+    padding: 7px 10px;
+    width: 100%;
+    gap: 8px;
+    justify-content: flex-start;
+    margin-left: 15px;
+  }
+  .filter-bar button{
+    gap: 5px;
+    padding: 5px 10px;
+    font-size: 10px;
+  }
+  .filter-bar button:last-child {
+    margin-right:25px; /* extra margin for last button */
+  }
+  .landingSection {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  .menu{
+    width: 105%;
+    margin-left: -5%;
+    margin-top: -35px;
+  }
+  .menu-content{
+    padding: 3px;
+  }
+  .sub-cards{
+    gap: 8px;
+  }
+  .card{
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media screen and (max-width:279px){
+  .navSection {
+    display: none;
+  }
+  .sideBar {
+    display: none;
+  }
+  .smallNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #006494;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: 5px 15px;
+    height: 8vh;
+    color: #fff;
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    z-index: 999;
+  }
+  .mobile-search {
+    color: #ffffff;
+  }
+  .intro {
+    width: 100%;
+    margin-top: -18%;
+    margin-left: -5%;
+    height: 20vh;
+  }
+  .intro-card{
+    width: 80%;
+  }
+  .intro-card h1{
+    font-size: 20px;
+  }
+  .intro-card .description{
+    font-size: 10px;
+  }
+  .intro-buttons button{
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+  .menu{
+    width: 105%;
+    margin-top: -10%;
+    margin-left: -5%;
+  }
+  .filter-bar{
+    padding: 5px 20px;
+    margin-top: -18%;
+    width:calc(100% - 5%);
+    gap: 8px;
+    justify-content:flex-start;
+  }
+  .filter-bar button{
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+  .menu-content{
+    padding: 3px;
+  }
+  .sub-cards{
+    gap: 8px;
+  }
+  .card{
+    width: 115px;
+    height: 115px;
+  }
+}
+
+/*medisScreen close */
+
+/*LoginSewction*/
+
+.loginSection{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 12vh;
+  z-index: 80;
+}
+.authForm{
+  background: white;
+  padding:10px 30px;
+  width: 320px; 
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-family: "Roboto", sans-serif;
+}
+.close-btn{
+  width: 15px;
+  height: 15px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  left: 300px;
+  border-radius: 5px;
+
+}
+.close-btn:hover{
+  background-color: #d82b4d;
+  color: white;
+}
+.authForm h2{
+  font-size: 30px;
+  margin-bottom: 20px;
+  font-family: "Roboto", sans-serif;
+}
+.authForm input[type="text"],
+.authForm input[type="password"],
+.authForm input[type='number'],
+.authForm input[type='url']{
+  width: 100%;
+  padding: 10px;
+  
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.authForm button.submit-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: rgb(38, 45, 128);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+.authForm .links {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+.authForm .links a {
+  margin-top: 12px;
+  color: rgb(137, 97, 97);
+  text-decoration: none;
+  font-size: 15px;
+}
+.authForm .links a:hover {
+  text-decoration: underline;
+}
+.authForm label{
+  text-align: start;
+  font-weight: bold;
+  line-height: 35px;
+}
+.checkbox-group{
+  display: flex;
+  justify-content: space-evenly;
+}
+.authForm textarea{
+  margin-bottom: 10px;
+}
+
+/*Error section */
+
+.errorSection{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 200px;
+  box-sizing: border-box;
+}
+.errorSection h1{
+  font-size: 100px;
+  
+}
+.errorSection div{
+  font-size: 30px;
+  font-family: sans-serif;
+}
+.errorSection p{
+  font-size: 20px;
+  color: blueviolet;
+}
