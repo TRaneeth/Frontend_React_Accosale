@@ -6,7 +6,7 @@ const Register = ({showLoginHandler,onClose}) => {
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
   const [error,setError] = useState("")
-  const [loading,setLoading] = useState(true)
+  const [loading,setLoading] = useState(false)
 
   const handleSubmit = async(e)=>{
     e.preventDefault()
@@ -31,7 +31,7 @@ const Register = ({showLoginHandler,onClose}) => {
         setError(data.error)
       }
     } catch (error) {
-      console.error('registration failed')
+      console.error(error)
       alert('registration failed')
     }
   }
@@ -39,14 +39,14 @@ const Register = ({showLoginHandler,onClose}) => {
   return (
     <div className="loginSection">
         <form className='authForm' onSubmit={handleSubmit}>
-            <button className="close-btn" onClick={onClose}>×</button>
+            <button type='button' className="close-btn" onClick={onClose}>×</button>
             <h2>Register</h2>
             <input type="text" name='username' value={username} onChange={(e)=>setUsername(e.target.value)} placeholder="Username"></input>
             <input type="text" name='email' value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Email"></input>
             <input type="password" name='password' value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Password"></input>
             <button className="submit-btn" type='submit'>Register</button>
             <div className="links">
-                <a href="#" onClick={showLoginHandler}>already have an account?</a>
+                <a href="#" onClick={(e) => { e.preventDefault(); showLoginHandler(); }}>already have an account?</a>
             </div>
         </form>
     </div>
