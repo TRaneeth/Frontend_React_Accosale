@@ -28,7 +28,8 @@ const Register = ({showLoginHandler,onClose}) => {
         showLoginHandler()
       }
       else{
-        setError(data.error)
+        setError(data.error || data)
+        alert(data.error || data)
       }
     } catch (error) {
       console.error(error)
@@ -46,7 +47,7 @@ const Register = ({showLoginHandler,onClose}) => {
             <input type="password" name='password' value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Password"></input>
             <button className="submit-btn" type='submit'>Register</button>
             <div className="links">
-                <a href="#" onClick={showLoginHandler}>already have an account?</a>
+                <a href="#" onClick={(e) => { e.preventDefault(); showLoginHandler(); }}>already have an account?</a>
             </div>
         </form>
     </div>
