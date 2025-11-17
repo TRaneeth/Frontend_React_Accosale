@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import { FaComments, FaBell, FaHeart, FaSearch, FaBars } from "react-icons/fa";
+import logo from "../assets/accosale-logoW.png";
 
 const NavBar = ({showLoginHandler,showLogout,logoutHandler}) => {
   return (
@@ -8,7 +9,7 @@ const NavBar = ({showLoginHandler,showLogout,logoutHandler}) => {
       <div className="navSection">
         <div className="logo">
           <Link to='/' style={{ textDecoration: 'none', color: 'white' }}>
-            <img src="a"/>ACCOSALE
+            <img src={logo} className='logo-png'/>
           </Link>
         </div>
         <div className="right-side">

@@ -33,6 +33,11 @@ html, body {
   font-size: 30px;
   font-family: 'Times New Roman', Times, serif;
   cursor: pointer;
+  top: 5px;
+}
+.logo-png{
+  width: 180px;
+  height: 160px;
 }
 .right-side{
   position: absolute;
