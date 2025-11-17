@@ -107,7 +107,7 @@ html, body {
   position: fixed;
   top: 10vh;
   left: 0;
-  z-index: 90;
+  z-index: 1100;
   height: calc(100vh - 25vh);
   width: 5%;  
   background-color: #006494;
