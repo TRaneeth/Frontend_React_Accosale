@@ -1,9 +1,10 @@
 import React from 'react'
 
-const sidebarButtons = () => {
+const sidebarButtons = ({onClose}) => {
   return (
     <div className='all-buttons'>
         <div className="about-us">
+            <button className="close-btnn" onClick={onClose}>×</button>
             <h1>About Accstore</h1>
             <p>AccStore is a trusted digital marketplace where buyers and sellers can trade 
                 verified online accounts quickly and safely.</p>

@@ -6,6 +6,7 @@ import Menu from '../components/Menu'
 import Login from '../components/forms/Login'
 import Register from '../components/forms/Register'
 import AddProduct from '../components/forms/AddProduct'
+import SidebarButtons from '../components/SidebarButtons'
 import { TbFlagSearch } from 'react-icons/tb'
 
 const LandingPage = () => {
@@ -13,6 +14,7 @@ const LandingPage = () => {
   const [showRegister,setShowRegister] = useState(false)
   const [showAddProduct,setShowAddProduct] = useState(false)
   const [showLogout,setShowLogout] = useState(false)
+  const [showSideButtons,setShowSideButtons] = useState(false)
 
   useEffect(()=>{
     const loginToken =localStorage.getItem('loginToken')
@@ -31,17 +33,20 @@ const LandingPage = () => {
     setShowLogin(true)
     setShowRegister(false)
     setShowAddProduct(false)
+    setShowSideButtons(false)
   }
   const showRegisterHandler=()=>{
     setShowRegister(true)
     setShowLogin(false)
     setShowAddProduct(false)
+    setShowSideButtons(false)
   }
   const showAddProductHandler=()=>{
     if(showLogout){
       setShowAddProduct(true)
       setShowLogin(false)
       setShowRegister(false)
+      setShowSideButtons(false)
     }
     else{
       alert('Please Login')
@@ -53,19 +58,26 @@ const LandingPage = () => {
     setShowLogin(false)
     setShowRegister(false)
     setShowAddProduct(false)
+    setShowSideButtons(false)
+  }
+  const sideBarButtonsHandler=()=>{
+    setShowLogin(false)
+    setShowRegister(false)
+    setShowAddProduct(false)
+    setShowSideButtons(true)
   }
 
   return (
     <>
         <section className='landingSection'>
             <NavBar showLoginHandler={showLoginHandler} showLogout={showLogout} logoutHandler={logoutHandler}/>
-            <SideBar showAddProductHandler={showAddProductHandler}/>
+            <SideBar showAddProductHandler={showAddProductHandler} sideBarButtonsHandler={sideBarButtonsHandler}/>
             <Intro showAddProductHandler={showAddProductHandler}/>
             <Menu/>
             {showLogin && <Login showRegisterHandler={showRegisterHandler} onClose={closeAllHandler}/>}
             {showRegister && <Register showLoginHandler={showLoginHandler} onClose={closeAllHandler}/>}
             {showAddProduct && showLogout && <AddProduct onClose={closeAllHandler}/>}
-            
+            {showSideButtons && <SidebarButtons onClose={closeAllHandler}/>}
         </section>
     </>
   )
