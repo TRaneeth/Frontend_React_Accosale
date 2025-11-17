@@ -6,7 +6,7 @@ import Menu from '../components/Menu'
 import Login from '../components/forms/Login'
 import Register from '../components/forms/Register'
 import AddProduct from '../components/forms/AddProduct'
-import SidebarButtons from '../components/SidebarButtons'
+import SidebarButtons from '../components/sidebuttons/SidebarButtons'
 import { TbFlagSearch } from 'react-icons/tb'
 
 const LandingPage = () => {
