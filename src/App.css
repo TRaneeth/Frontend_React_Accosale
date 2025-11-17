@@ -641,7 +641,7 @@ html, body {
   border-radius: 5px;
 
 }
-.close-btn:hover,.close-btnn:hover{
+.close-btn:hover,.close-btnn:hover,.help-modal .close:hover{
   background-color: #d82b4d;
   color: white;
 }
@@ -701,6 +701,7 @@ html, body {
   margin-bottom: 10px;
 }
 
+/* Info Button */
 
 .all-buttons{
   width: 100%;
@@ -722,7 +723,7 @@ html, body {
   flex-direction: column;
   gap: 10px;
   font-family: "Roboto", sans-serif;
-  
+
 }
 .about-us h1{
   text-align: center;
@@ -744,3 +745,50 @@ html, body {
   left: 330px;
   border-radius: 5px;
 }
+
+/* Help button */
+
+.help-overlay {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 15vh;
+  z-index: 90;
+}
+
+.help-modal {
+  background: white;
+  padding:10px 30px;
+  width: 500px; 
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: "Roboto", sans-serif;
+}
+
+.help-modal .close {
+  width: 15px;
+  height: 15px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  left: 490px;
+  border-radius: 5px;
+}
+.faq ul , .contact{
+  line-height: 25px;
+}
+.faq h3{
+  margin-bottom: 10px;
+}
+.faq ul li{
+  margin-bottom: 15px;
+}
+

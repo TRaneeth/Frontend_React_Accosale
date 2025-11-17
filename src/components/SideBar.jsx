@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FaHome, FaUser, FaPlus, FaCog, FaInfoCircle, FaQuestionCircle, FaSignOutAlt } from "react-icons/fa";
 
-const SideBar = ({showAddProductHandler,infoButtonHandler}) => {
+const SideBar = ({showAddProductHandler,infoButtonHandler,helpButtonHandler}) => {
   const navigate = useNavigate();
 
   const goHome = () => {
@@ -30,7 +30,7 @@ const SideBar = ({showAddProductHandler,infoButtonHandler}) => {
         <FaInfoCircle />
         <span>About us</span>
       </div>
-      <div className="sideBar-item">
+      <div className="sideBar-item" onClick={helpButtonHandler}>
         <FaQuestionCircle />
         <span>Help</span>
       </div>
