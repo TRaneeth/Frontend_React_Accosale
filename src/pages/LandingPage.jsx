@@ -25,11 +25,21 @@ const LandingPage = () => {
     }
   },[])
 
-  const logoutHandler=()=>{
-    confirm("are you sure to logout?")
-    localStorage.removeItem('loginToken')
-    setShowLogout(false)
+  const logoutHandler = () => {
+  const loginToken = localStorage.getItem('loginToken');
+  if (loginToken) {
+    const ok = confirm("Are you sure you want to logout?");
+    if (ok) {
+      localStorage.removeItem('loginToken');
+      setShowLogout(false);
+      closeAllHandler();
+      alert('Logged out successfully');
+    }
+  } else {
+    alert('No account is logged in. Please login first.');
   }
+}
+
 
   const showLoginHandler=()=>{
     setShowLogin(true)
@@ -86,7 +96,7 @@ const LandingPage = () => {
         <section className='landingSection'>
             <NavBar showLoginHandler={showLoginHandler} showLogout={showLogout} logoutHandler={logoutHandler}/>
             <SideBar showAddProductHandler={showAddProductHandler} infoButtonHandler={infoButtonHandler} 
-            helpButtonHandler={helpButtonHandler}/>
+            helpButtonHandler={helpButtonHandler} logoutHandler={logoutHandler}/>
             <Intro showAddProductHandler={showAddProductHandler}/>
             <Menu/>
             {showLogin && <Login showRegisterHandler={showRegisterHandler} onClose={closeAllHandler}/>}
