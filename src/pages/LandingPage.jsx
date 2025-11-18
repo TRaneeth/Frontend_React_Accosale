@@ -8,6 +8,7 @@ import Register from '../components/forms/Register'
 import AddProduct from '../components/forms/AddProduct'
 import Info from '../components/sidebuttons/Info'
 import Help from '../components/sidebuttons/Help'
+import YourAccounts from '../components/YourAccounts'
 import { TbFlagSearch } from 'react-icons/tb'
 
 const LandingPage = () => {
@@ -17,6 +18,7 @@ const LandingPage = () => {
   const [showLogout,setShowLogout] = useState(false)
   const [showInfoButton,setShowInfoButton] = useState(false)
   const [showHelpButton,setShowHelpButton] = useState(false)
+  const [showYourAccounts, setShowYourAccounts] = useState(false)
 
   useEffect(()=>{
     const loginToken =localStorage.getItem('loginToken')
@@ -91,19 +93,32 @@ const LandingPage = () => {
     setShowHelpButton(true)
   }
 
+  const yourAccountsHandler = () => {
+    const token = localStorage.getItem('loginToken');
+    if (!token) { 
+      alert('Please login'); 
+      setShowLogin(true); 
+      return; 
+    } 
+    setShowYourAccounts(true);
+}
+
+
   return (
     <>
         <section className='landingSection'>
             <NavBar showLoginHandler={showLoginHandler} showLogout={showLogout} logoutHandler={logoutHandler}/>
             <SideBar showAddProductHandler={showAddProductHandler} infoButtonHandler={infoButtonHandler} 
             helpButtonHandler={helpButtonHandler} logoutHandler={logoutHandler}/>
-            <Intro showAddProductHandler={showAddProductHandler}/>
+            <Intro showAddProductHandler={showAddProductHandler} yourAccountsHandler={yourAccountsHandler}/>
             <Menu/>
             {showLogin && <Login showRegisterHandler={showRegisterHandler} onClose={closeAllHandler}/>}
             {showRegister && <Register showLoginHandler={showLoginHandler} onClose={closeAllHandler}/>}
-            {showAddProduct && showLogout && <AddProduct onClose={closeAllHandler}/>}
+            {showAddProduct && showLogout && <AddProduct onClose={closeAllHandler} onPostSuccess={() => {
+  setShowYourAccounts(true)}}/>}
             {showInfoButton && <Info onClose={closeAllHandler}/>}
             {showHelpButton && <Help onClose={closeAllHandler}/>}
+            {showYourAccounts && <YourAccounts onClose={() => setShowYourAccounts(false)} />}
         </section>
     </>
   )

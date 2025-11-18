@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Intro = ({showAddProductHandler}) => {
+const Intro = ({showAddProductHandler,yourAccountsHandler}) => {
   return (
     <div className='intro'>
         <div className='intro-card'>
@@ -8,7 +8,7 @@ const Intro = ({showAddProductHandler}) => {
             <p className="description">AccoSale is your safe and reliable platform to buy, sell, and trade verified digital accounts across popular platforms with ease and confidence.</p>
             <div className='intro-buttons'>
                 <button onClick={showAddProductHandler}>Post An Account</button>
-                <button>Your Accounts</button>
+                <button onClick={yourAccountsHandler}>Your Accounts</button>
             </div>
         </div>
     </div>

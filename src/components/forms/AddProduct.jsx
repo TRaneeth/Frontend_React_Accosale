@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { API_URL } from "../../data/ApiPath";
 
-const AddProduct = ({ onClose }) => {
+const AddProduct = ({ onClose , onPostSuccess }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [type, setType] = useState("");
   const [id, setId] = useState("");
@@ -72,6 +72,8 @@ const AddProduct = ({ onClose }) => {
         setLink("")
         setFile("")
         setInfo("")
+        if (typeof onPostSuccess === 'function') onPostSuccess() // tell parent to refresh/open
+        onClose() // close modal if you want
       } else {
         alert(data.message || "Failed to post");
       }
