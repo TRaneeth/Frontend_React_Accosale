@@ -29,7 +29,8 @@ const HelpModal = ({ onClose }) => {
         <section className="contact">
           <h3>Contact Support</h3>
           <p>Email: 19891a0236@gmail.com</p>
-          <button className="open-ticket">Report an Issue</button>
+          <a href="mailto:19891a0236@gmail.com?subject=Report%20an%20Issue&body=Describe%20issue%20here">Report an issue</a>
+
         </section>
       </div>
     </div>
