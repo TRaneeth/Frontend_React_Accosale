@@ -115,7 +115,7 @@ const LandingPage = () => {
             {showLogin && <Login showRegisterHandler={showRegisterHandler} onClose={closeAllHandler}/>}
             {showRegister && <Register showLoginHandler={showLoginHandler} onClose={closeAllHandler}/>}
             {showAddProduct && showLogout && <AddProduct onClose={closeAllHandler} onPostSuccess={() => {
-  setShowYourAccounts(true)}}/>}
+            setShowYourAccounts(true)}}/>}
             {showInfoButton && <Info onClose={closeAllHandler}/>}
             {showHelpButton && <Help onClose={closeAllHandler}/>}
             {showYourAccounts && <YourAccounts onClose={() => setShowYourAccounts(false)} />}
