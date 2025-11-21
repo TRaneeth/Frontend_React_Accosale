@@ -109,12 +109,12 @@ html, body {
   left: 0;
   z-index: 1100;
   height: calc(100vh - 25vh);
-  width: 5%;  
+  width: 72px;  
   background-color: #006494;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 10px;
+  padding-top: 18px;
   margin-top: 35px;
   margin-bottom: 35px;
   border-top-right-radius: 15px;
@@ -136,7 +136,7 @@ html, body {
 
 .sideBar-item span {
   position: absolute;
-  left: 60px;   /* icon pakka text */
+  left: 16px;   /* icon pakka text */
   top: 50%;
   transform: translateY(-50%);
   background: #006494;
@@ -155,15 +155,16 @@ html, body {
 
 /*Intro*/
 .intro{
-  min-height: 40vh;   /* minimum space fix avthadi */
+  min-height: auto;   /* minimum space fix avthadi */
   height: auto;       /* content ekkuva aithe adjust avuthadi */
-  padding: 20px;      /* breathing space */
+  padding: 40px 20px;      /* breathing space */
   display: flex;
   flex-direction: column;  /* text + desc + buttons vertical ga arrange */
   align-items: center;
   justify-content: center;
   text-align: center;
   background-color: #F4EBD9;
+  
 }
 .intro:hover{
   background-color: #f5efdd;
@@ -216,12 +217,13 @@ html, body {
   justify-content:center;      /* center on big screens */
   align-items:center;
   gap:15px;
-  padding:15px 20px;
+  padding:12px 20px;
   background-color:#F4EBD9;
   border-bottom:1px solid #c3d8eb;
   position:sticky;
-  top:10vh;
+  top:calc(10vh + 8px);
   z-index:80;
+  
 
   /* no margin-left here */
   width:100%; 
@@ -258,36 +260,64 @@ html, body {
 }
 /*Menu*/
 .menu {
-  width: 100%;           
+  width: 100%;
   min-height: 100vh;
-  background-color: #F4EBD9;
+  background: #f6f6f6;
+  padding-top: 0px;
 }
-.menu-content{
-  margin-top: 1%;
-  margin-left: 7%;
-  width: 90%;
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: #F4EBD9;
+.menu-content {
+  width: calc(100% - 72px - 80px);
+  margin: 8px auto 40px;
+  padding: 10px;
 }
 .sub-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;  /* center lo align */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
 }
 .card {
-  background: white;
-  width: 280px;
-  height: 280px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* animation */
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 15px;
+  height: auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  transition: 0.25s ease;
+  cursor: pointer;
 }
 .card:hover {
-  transform: translateY(-1px) scale(1.02);  /* slight lift + enlarge */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* stronger shadow */
+  transform: translateY(-6px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
 }
+/* Card image */
+.card-image {
+  width: 100%;
+  height: 160px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: #e4e4e4;
+}
+/* Title */
+.card-title {
+  font-size: 18px;
+  margin-top: 12px;
+  font-weight: 600;
+  color: #222;
+}
+/* Price */
+.card-price {
+  margin-top: 5px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ff4d4d;
+}
+/* Info short text */
+.card-info {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+}
+
 
 /*mediaQueries*/
 
@@ -440,6 +470,10 @@ html, body {
     width: 170px;
     height: 170px;
   }
+  .acco-avatar { width:72px; height:72px; flex:0 0 72px; }
+  .acco-card { padding:12px; min-height:180px; }
+  .btn { padding:6px 12px; font-size:13px; }
+  .sub-cards { gap: 12px; }
 }
 
 /* 3. Extra Small Screens (Mobile) */
@@ -902,3 +936,125 @@ html, body {
   border-radius: 6px;
   cursor: pointer;
 }
+
+/* Account card (paper design) */
+
+/* Account card (paper design) */
+.acco-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 220px;
+}
+
+/* top row: avatar + meta */
+.acco-top {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+/* circular avatar */
+.acco-avatar {
+  width: 92px;
+  height: 92px;
+  flex: 0 0 92px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #f0f0f0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.acco-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display:block;
+}
+
+/* meta */
+.acco-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.acco-type {
+  font-size: 20px;
+  color: #4b5563;
+  font-weight: 600;
+}
+.acco-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
+}
+.acco-metric {
+  display: flex;
+  gap: 8px;
+  font-size: 16px;
+  color: #374151;
+  margin-top: 6px;
+}
+.acco-price {
+  margin-top: 4px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #e11d48;
+}
+
+/* body fields */
+.acco-body .acco-field {
+  font-size: 14px;
+  color: #51555b;
+  margin-bottom: 6px;
+}
+.acco-body .link-text {
+  color: #0b5394;
+  word-break: break-all;
+}
+.acco-about p {
+  margin-top: 6px;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* footer buttons */
+.acco-footer {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+.btn {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+}
+.btn-primary {
+  background: #006494;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0,100,150,0.12);
+}
+.btn-outline {
+  background: #ffffff;
+  color: #006494;
+  border: 1px solid #006494;
+}
+
+/* grid for cards (if not already present) */
+.sub-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+
+

@@ -62,6 +62,7 @@ const AddProduct = ({ onClose , onPostSuccess }) => {
       const data = await response.json();
 
       if (response.ok) {
+        window.dispatchEvent(new CustomEvent("newPost"));
         console.log(data);
         alert("Posted successfully");
         setType("")
@@ -82,6 +83,7 @@ const AddProduct = ({ onClose , onPostSuccess }) => {
       alert("Failed to post");
     }
   };
+  
 
   return (
     <div className="loginSection">
