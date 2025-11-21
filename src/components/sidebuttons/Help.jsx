@@ -1,40 +1,55 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const HelpModal = ({ onClose }) => {
+const Help = () => {
+  const nav = useNavigate();
 
   return (
-    <div className="help-overlay">
-      <div className="help-modal">
-        <button className="close" onClick={onClose}>×</button>
+    <div className="route-page">   
+      <div className="page-header">
         <h2>Help & Support</h2>
-        <section className="faq">
-          <h3>Popular Questions</h3>
-          <ul>
-            <li>
-              <strong>How to post an account?</strong>
-              <p>Click "Post An Account" → fill the form → submit.</p>
-            </li>
-            <li>
-              <strong>How to buy safely?</strong>
-              <p>Check seller rating and never share your password.</p>
-            </li>
-            <li>
-              <strong>Our policy!</strong>
-              <p>We never ask your digital account or social media account passwords. 
-                kindly dont share your password to the customer until you trust them. 
-                We are not responsible for your digital account passwords.</p>
-            </li>
-          </ul>
-        </section>
-        <section className="contact">
-          <h3>Contact Support</h3>
-          <p>Email: 19891a0236@gmail.com</p>
-          <a href="mailto:19891a0236@gmail.com?subject=Report%20an%20Issue&body=Describe%20issue%20here">Report an issue</a>
-
-        </section>
+        <button className="small-btn" onClick={() => nav(-1)}>Go Back</button>
       </div>
+      <div className="page-content">
+        <h3>Popular Questions</h3>
+        <ul>
+          <li>
+            <strong>How do I post an account?</strong>
+            <p>Click "Post An Account" → fill the form → upload an image → submit.</p>
+          </li>
+          <li>
+            <strong>Why can't I see my posted account?</strong>
+            <p>Only your own posts appear inside "Your Accounts".  
+            Make sure you're logged in with the same account.</p>
+          </li>
+          <li>
+            <strong>How to buy safely?</strong>
+            <p>Check seller details. Ask screenshots. Never share your passwords until you fully trust the buyer.</p>
+          </li>
+        </ul>
+        <h3>Troubleshooting</h3>
+        <ul>
+          <li>
+            <strong>Image not visible?</strong>
+            <p>Open the image URL directly:  
+            <code>API_URL/uploads/yourImageName.jpg</code></p>
+          </li>
+          <li>
+            <strong>Unexpected token "&lt;" error?</strong>
+            <p>Your backend (Render) was sleeping and returned HTML.  
+            Refresh or retry after backend wakes up.</p>
+          </li>
+          <li>
+            <strong>Post deleted but still visible?</strong>
+            <p>Refresh your page. YourAccounts will reload your latest posts.</p>
+          </li>
+        </ul>
+        <h3>Contact Support</h3>
+        <p>Email: <a href="mailto:19891a0236@gmail.com">19891a0236@gmail.com</a></p>      
+      </div>
+
     </div>
   );
 };
 
-export default HelpModal;
+export default Help;
