@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import toast from "react-hot-toast";
 import { API_URL } from '../../data/ApiPath'
 
 const Register = ({showLoginHandler,onClose}) => {
@@ -24,16 +25,16 @@ const Register = ({showLoginHandler,onClose}) => {
         setUsername("")
         setEmail("")
         setPassword("")
-        alert('user registered successfully')
+        toast.success('Registered successfully')
         showLoginHandler()
       }
       else{
         setError(data.error || data)
-        alert(data.error || data)
+        toast.error(data.error || data)
       }
     } catch (error) {
       console.error(error)
-      alert('registration failed')
+      toast.error('registration failed')
     }
   }
 

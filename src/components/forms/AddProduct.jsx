@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { API_URL } from "../../data/ApiPath";
 
 const AddProduct = ({ onClose , onPostSuccess }) => {
@@ -29,7 +30,7 @@ const AddProduct = ({ onClose , onPostSuccess }) => {
       const loginToken = localStorage.getItem("loginToken");
       if (!loginToken) {
         console.error("User not authenticated");
-        alert("User not authenticated");
+        toast.error("User not authenticated");
         return;
       }
 
@@ -64,7 +65,7 @@ const AddProduct = ({ onClose , onPostSuccess }) => {
       if (response.ok) {
         window.dispatchEvent(new CustomEvent("newPost"));
         console.log(data);
-        alert("Posted successfully");
+        toast.success("Posted successfully");
         setType("")
         setId("")
         setCategoryValue("")

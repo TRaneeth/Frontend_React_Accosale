@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import toast from "react-hot-toast";
 import NavBar from '../components/NavBar';
 import SideBar from '../components/SideBar';
 import Intro from '../components/Intro';
@@ -10,7 +11,8 @@ import Info from '../components/sidebuttons/Info';
 import Help from '../components/sidebuttons/Help';
 import YourAccounts from '../components/YourAccounts';
 import { TbFlagSearch } from 'react-icons/tb';
-import { API_URL } from '../data/ApiPath';   // ⭐ IMPORTANT ⭐
+import { API_URL } from '../data/ApiPath';   
+import Wishlist from '../components/sidebuttons/Wishlist';
 
 const LandingPage = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -20,6 +22,8 @@ const LandingPage = () => {
   const [showInfoButton, setShowInfoButton] = useState(false);
   const [showHelpButton, setShowHelpButton] = useState(false);
   const [showYourAccounts, setShowYourAccounts] = useState(false);
+  const [searchText,setSearchText] = useState("");
+  const [showWishlist,setShowWishlist] = useState(false)
 
   // Check login on page load
   useEffect(() => {
@@ -43,7 +47,7 @@ const LandingPage = () => {
         localStorage.removeItem('loginToken');
         setShowLogout(false);
         closeAllHandler();
-        alert('Logged out successfully');
+        toast.success('Logged out successfully');
       }
     } else {
       alert('No account is logged in. Please login first.');
@@ -77,7 +81,7 @@ const LandingPage = () => {
       setShowInfoButton(false);
       setShowHelpButton(false);
     } else {
-      alert('Please Login');
+      toast('Please Login');
       setShowLogin(true);
     }
   };
@@ -87,17 +91,7 @@ const LandingPage = () => {
     setShowLogin(false);
     setShowRegister(false);
     setShowAddProduct(false);
-    setShowInfoButton(false);
-    setShowHelpButton(false);
     setShowYourAccounts(false);
-  };
-
-  const infoButtonHandler = () => {
-    setShowInfoButton(true);
-  };
-
-  const helpButtonHandler = () => {
-    setShowHelpButton(true);
   };
 
   // Show Your Accounts modal
@@ -116,18 +110,19 @@ const LandingPage = () => {
     <>
       <section className='landingSection'>
         
-        <NavBar showLoginHandler={showLoginHandler} showLogout={showLogout} logoutHandler={logoutHandler}/>
-        <SideBar showAddProductHandler={showAddProductHandler} infoButtonHandler={infoButtonHandler}
-          helpButtonHandler={helpButtonHandler} logoutHandler={logoutHandler}/>
+        <NavBar showLoginHandler={showLoginHandler} showLogout={showLogout} logoutHandler={logoutHandler}
+          onSearch={(txt) => setSearchText(txt)}/>
+        <SideBar showAddProductHandler={showAddProductHandler}  logoutHandler={logoutHandler}/>
         <Intro showAddProductHandler={showAddProductHandler} yourAccountsHandler={yourAccountsHandler}/>
-        <Menu />
+        <Menu search={searchText}/>
         {showLogin && (<Login showRegisterHandler={showRegisterHandler} onClose={closeAllHandler}/>)}
         {showRegister && (<Register showLoginHandler={showLoginHandler} onClose={closeAllHandler}/>)}
         {showAddProduct && showLogout && (
           <AddProduct onClose={closeAllHandler} onPostSuccess={() => setShowYourAccounts(true)} />)}
 
-        {showInfoButton && <Info onClose={closeAllHandler} />}
-        {showHelpButton && <Help onClose={closeAllHandler} />}
+        {showInfoButton && <Info />}
+        {showHelpButton && <Help />}
+        {showWishlist && <Wishlist/>}
 
         {showYourAccounts && (<YourAccounts onClose={() => setShowYourAccounts(false)} />)}
 

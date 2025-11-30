@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import toast from "react-hot-toast";
 import { API_URL } from '../../data/ApiPath'
 
 const Login = ({showRegisterHandler,onClose}) => {
@@ -17,14 +18,16 @@ const Login = ({showRegisterHandler,onClose}) => {
       })
       const data = await response.json()
       if(response.ok){
-        alert('Login Successful')
+        toast.success('Login Successfull')
         setEmail("")
         setPassword("")
         localStorage.setItem('loginToken',data.token)
-        window.location.reload()
+        setTimeout(() => {
+          window.location.reload();
+        }, 200);
       }
       else{
-        alert('email is not registered, create an account')
+        toast.error('Invalid credentians or unregistered email')
       }
     } catch (error) {
       console.error(error)
