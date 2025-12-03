@@ -22,6 +22,8 @@ const Login = ({showRegisterHandler,onClose}) => {
         setEmail("")
         setPassword("")
         localStorage.setItem('loginToken',data.token)
+        localStorage.setItem("userId", data.userId);
+        window.dispatchEvent(new Event('userLoggedIn'));
         setTimeout(() => {
           window.location.reload();
         }, 200);

@@ -1,10 +1,51 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from "react-hot-toast";
+import { API_URL } from "../data/ApiPath";
 
 const AccountCard = ({ item }) => {
   const nav = useNavigate();
   const avatar = item.image ? item.image : '/mnt/data/carddddd.jpg';
+
+  const openChat = async () => {
+    const token = localStorage.getItem("loginToken");
+    const me = localStorage.getItem("userId");
+
+    if (!token || !me) {
+      return toast.error("Please login first!");
+    }
+
+    // POST OWNER — array lo untadhi
+    const otherUser = item.user?.[0];
+
+    if (!otherUser) {
+      return toast.error("Seller not found for this post");
+    }
+
+    try {
+      const res = await fetch(`${API_URL}/chat/open`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          token
+        },
+        body: JSON.stringify({ otherUser })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        return toast.error(data.error || "Failed to open chat");
+      }
+
+      // Navigate to chat
+      nav(`/chat/${data._id}`, { state: { chat: data } });
+    } catch (err) {
+      console.error(err);
+      toast.error("Chat error");
+    }
+  };
+
   const handleWishlist = () => {
     const token = localStorage.getItem("loginToken");
     if (!token) {
@@ -31,9 +72,9 @@ const AccountCard = ({ item }) => {
 
         <div className="acco-meta">
           <div className="acco-type">{item.type || item.selectedCategory}</div>
-          <div className="acco-name">{item.username || item.id}</div>
+          <div className="acco-name">{item.id}</div>
 
-          {item.category && item.category.length > 0 && item.selectedCategory && (
+          {item.category?.length > 0 && item.selectedCategory && (
             <div className="acco-metric">
               {item.category[0]} : {item.selectedCategory}
             </div>
@@ -45,7 +86,7 @@ const AccountCard = ({ item }) => {
 
       <div className="acco-body">
         <div className="acco-field">
-          <light>link:</light> <span className="link-text">{item.link}</span>
+          <span>link:</span> <span className="link-text">{item.link}</span>
         </div>
 
         <div className="acco-about">
@@ -54,7 +95,7 @@ const AccountCard = ({ item }) => {
       </div>
 
       <div className="acco-footer">
-        <button className="btn btn-primary">chat</button>
+        <button className="btn btn-primary" onClick={openChat}>chat</button>
 
         <button className="btn btn-primary btn-outline" onClick={handleWishlist}>
           Add to wishlist
