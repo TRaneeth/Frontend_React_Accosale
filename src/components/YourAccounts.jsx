@@ -23,34 +23,35 @@ const YourAccounts = () => {
     }
   };
 
-    const deletePost = async (postId) => {
-        const token = localStorage.getItem("loginToken");
-        if (!token) { alert("Please login"); return; }
-        const ok = confirm("Are you sure want to delete this post?");
-        if (!ok) return;
-        // optimistic UI update: remove immediately
-        const previous = posts;
-        setPosts(prev => prev.filter(p => p._id !== postId));
-        try {
-            const res = await fetch(`${API_URL}/post/${postId}`, {
-            method: "DELETE",
-            headers: { token }
-        });
-        // if backend returns JSON message
-        const data = await res.json();
-        if (!res.ok) {
-            setPosts(previous);
-            console.error("Delete failed:", data);
-            alert(data.message || data.error || "Delete failed");
-            return;
-        }
-        } catch (err) {
-            setPosts(previous);
-            console.error(err);
-            alert("Network error. Try again.");
-        }
-    };
+  const deletePost = async (postId) => {
+    const token = localStorage.getItem("loginToken");
+    if (!token) { alert("Please login"); return; }
+    const ok = confirm("Are you sure want to delete this post?");
+    if (!ok) return;
+    const previous = posts;
+    setPosts(prev => prev.filter(p => p._id !== postId));
+    try {
+      const res = await fetch(`${API_URL}/post/${postId}`, {
+        method: "DELETE",
+        headers: { token }
+      });
+      const data = await res.json().catch(()=>({}));
+      if (!res.ok) {
+        setPosts(previous);
+        console.error("Delete failed:", data);
+        alert(data.message || data.error || "Delete failed");
+        return;
+      }
+    } catch (err) {
+      setPosts(previous);
+      console.error(err);
+      alert("Network error. Try again.");
+    }
+  };
 
+  const editPost = (post) => {
+    navigate(`/edit-post/${post._id}`, { state: { post } });
+  };
 
   useEffect(() => {
     fetchMyPosts();
@@ -59,7 +60,7 @@ const YourAccounts = () => {
   if (loading) return <div className="your-accounts-page"><h2>Loading...</h2></div>;
 
   return (
-    <div className="your-accounts-page">
+    <div className="your-accounts-page" style={{ padding: 20 }}>
       <div className="your-accounts-header">
         <h2>Your Accounts</h2>
         <button className="go-home-btn" onClick={() => navigate("/")}>
@@ -72,25 +73,36 @@ const YourAccounts = () => {
       ) : (
         <div className="accounts-list">
           {posts.map((p) => (
-            <div className="account-card" key={p._id}>
-              {p.image && (
-                <img src={`${API_URL}/uploads/${p.image}`} alt="post" 
-                style={{
-                    width: "200px",
-                    height: "200px",
-                    objectFit: "cover",   
-                    objectPosition: "center" 
-                }}/>
-              )}
-              <div className="account-info">
-                <h4>{p.type}</h4>
-                <p>{p.id}</p>
-                <p>{p.category[0].replace(/^\w/, c => c.toUpperCase())} - {p.selectedCategory}</p>
-                <p>Price : ₹{p.price}</p>
-                <p>Link : {p.link}</p>
-                <p>{p.info}</p>
+            <div key={p._id} className="account-card" style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:12, padding:12 }}>
+              <div style={{ display:'flex', gap:12, alignItems:'center' }}>
+                {p.image && (
+                  <img src={`${API_URL}/uploads/${p.image}`} alt="post"
+                    style={{
+                      width: 160,
+                      height: 110,
+                      objectFit: "cover",
+                      objectPosition: "center",
+                      borderRadius: 8
+                    }}/>
+                )}
+                <div className="account-info">
+                  <h4 style={{ margin: 0 }}>{p.type}</h4>
+                  <p style={{ margin: 0 }}>{p.id}</p>
+                  <p style={{ margin: 0 }}>
+                    {(p.category && p.category[0]) ? `${p.category[0].replace(/^\w/, c => c.toUpperCase())} - ${p.selectedCategory}` : p.selectedCategory}
+                  </p>
+                  <p style={{ margin: 0 }}>Price : ₹{p.price}</p>
+                  <p style={{ margin: 0 }}>Link : {p.link}</p>
+                  <p style={{ margin: 0 }}>{p.info}</p>
+                </div>
               </div>
-              <button className="delpost" onClick={() => deletePost(p._id)}>Delete post</button>
+
+              <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
+                <button className="editpost" onClick={() => editPost(p)} style={{ padding:'8px 12px' }}>Edit</button>
+                <button className="delpost" onClick={() => deletePost(p._1d || p._id)} style={{ padding:'8px 12px', background:'crimson', color:'#fff', border:0, borderRadius:6 }}>
+                  Delete post
+                </button>
+              </div>
             </div>
           ))}
         </div>

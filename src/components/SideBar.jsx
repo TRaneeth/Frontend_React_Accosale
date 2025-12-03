@@ -14,7 +14,7 @@ const SideBar = ({showAddProductHandler,logoutHandler}) => {
         <FaHome />
         <span>Home</span>
       </div>
-      <div className="sideBar-item">
+      <div className="sideBar-item" onClick={() => navigate('/profile')}>
         <FaUser />
         <span>Profile</span>
       </div>
@@ -22,10 +22,7 @@ const SideBar = ({showAddProductHandler,logoutHandler}) => {
         <FaPlus />
         <span>Add +</span>
       </div>
-      <div className="sideBar-item">
-        <FaCog />
-        <span>Settings</span>
-      </div>
+      
       <div className="sideBar-item" onClick={() => navigate('/aboutus')}>
         <FaInfoCircle />
         <span>About us</span>

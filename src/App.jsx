@@ -9,6 +9,8 @@ import Info from './components/sidebuttons/Info';
 import Wishlist from './components/sidebuttons/Wishlist'
 import ChatContainer from './components/sidebuttons/ChatContainer';
 import ChatWindow from './components/sidebuttons/ChatWindow';
+import Profile from './components/sidebuttons/Profile';
+import EditPost from './components/sidebuttons/EditPost';
 
 
 const App = () => {
@@ -23,6 +25,8 @@ const App = () => {
         <Route path="/wishlist" element={<Wishlist/>} />
         <Route path="/chat" element={<ChatContainer />} />
         <Route path="/chat/:id" element={<ChatWindow />} />
+        <Route path="/profile" element={<Profile/>} />
+        <Route path="/edit-post/:id" element={<EditPost/>} />
         {/* future pages */}
       </Routes>
     </Router>

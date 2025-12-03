@@ -83,7 +83,6 @@ const NavBar = ({ showLoginHandler, showLogout, logoutHandler, onSearch }) => {
             )}
           </div>
 
-          <div><FaBell className="text-xl" /></div>
 
           {/* wishlist icon */}
           <div style={{ cursor: "pointer" }} onClick={goWishlist}>
