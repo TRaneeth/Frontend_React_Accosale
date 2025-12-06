@@ -11,7 +11,7 @@ import ChatContainer from './components/sidebuttons/ChatContainer';
 import ChatWindow from './components/sidebuttons/ChatWindow';
 import Profile from './components/sidebuttons/Profile';
 import EditPost from './components/sidebuttons/EditPost';
-
+import Policies from './components/sidebuttons/Policies';
 
 const App = () => {
   return (
@@ -27,6 +27,9 @@ const App = () => {
         <Route path="/chat/:id" element={<ChatWindow />} />
         <Route path="/profile" element={<Profile/>} />
         <Route path="/edit-post/:id" element={<EditPost/>} />
+        <Route path="/policies" element={<Policies />} />
+        <Route path="/terms" element={<Policies />} />
+        <Route path="/privacy" element={<Policies />} />
         {/* future pages */}
       </Routes>
     </Router>

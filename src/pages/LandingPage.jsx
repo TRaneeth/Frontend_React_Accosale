@@ -13,6 +13,7 @@ import YourAccounts from '../components/YourAccounts';
 import { API_URL } from '../data/ApiPath';
 import Wishlist from '../components/sidebuttons/Wishlist';
 import SideDrawer from '../components/sidebuttons/SideDrawer';
+import Footer from '../components/Footer';
 
 const LandingPage = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -158,12 +159,11 @@ const LandingPage = () => {
         )}
 
         {/* DRAWER — FIXED */}
-        <SideDrawer
-  open={showSubmenu}
-  onClose={() => setShowSubmenu(false)}
-  showAddProductHandler={showAddProductHandler}
-  logoutHandler={logoutHandler}
-/>
+        <SideDrawer open={showSubmenu}
+          onClose={() => setShowSubmenu(false)}
+          showAddProductHandler={showAddProductHandler}
+          logoutHandler={logoutHandler}/>
+        <Footer/>
 
 
       </section>
