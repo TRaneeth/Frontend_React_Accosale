@@ -18,6 +18,16 @@ const NavBar = ({ showLoginHandler, showLogout, logoutHandler, onSearch, submenu
     navigate("/wishlist");
   };
 
+  // NEW: openChat checks login first
+  const openChat = () => {
+    const token = localStorage.getItem("loginToken");
+    if (!token) {
+      toast.error("Please login!");
+      return;
+    }
+    navigate("/chat");
+  };
+
   const loadUnread = async () => {
     try {
       const token = localStorage.getItem("loginToken");
@@ -64,7 +74,7 @@ const NavBar = ({ showLoginHandler, showLogout, logoutHandler, onSearch, submenu
           </div>
 
           <div style={{ position: "relative", cursor: "pointer", marginRight: 10 }} 
-               onClick={() => navigate("/chat")}>
+               onClick={openChat}>
             <FaComments className="text-xl" />
             {unread > 0 && (
               <div style={{
@@ -110,7 +120,7 @@ const NavBar = ({ showLoginHandler, showLogout, logoutHandler, onSearch, submenu
           </div>
 
           <div style={{ position: "relative", cursor: "pointer", marginRight: 10 }} 
-               onClick={() => navigate("/chat")}>
+               onClick={openChat}>
             <FaComments className="text-xl" />
             {unread > 0 && (
               <div style={{
