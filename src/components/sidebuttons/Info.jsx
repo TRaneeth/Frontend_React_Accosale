@@ -9,7 +9,7 @@ const Info = () => {
       
       <div className="page-header">
         <h2>About AccoSale</h2>
-        <button className="small-btn" onClick={() => nav(-1)}>Go Back</button>
+        <button className="small-btn" onClick={() => nav(-1)}>←</button>
       </div>
 
       <div className="page-content">

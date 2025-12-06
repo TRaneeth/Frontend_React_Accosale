@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { API_URL } from "../../data/ApiPath";
 import { useNavigate } from "react-router-dom";
 import YourAccounts from "../YourAccounts";
+import toast from "react-hot-toast";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -75,16 +76,16 @@ const Profile = () => {
 
       const data = await res.json();
       if (res.ok) {
-        alert("Profile updated");
+        toast.success("Profile updated");
         setEditing(false);
         await loadUser();
         window.dispatchEvent(new Event("userLoggedIn"));
       } else {
-        alert(data.error || data.message || "Update failed");
+        toast.error(data.error || data.message || "Update failed");
       }
     } catch (err) {
       console.error("submitProfile err", err);
-      alert("Network error");
+      toast.error("Network error");
     }
   };
 
@@ -101,10 +102,10 @@ const Profile = () => {
       });
       const data = await res.json();
       if (res.ok) alert("Password changed");
-      else alert(data.error || data.message || "Failed");
+      else toast(data.error || data.message || "Failed");
     } catch (err) {
       console.error("changePassword err", err);
-      alert("Network error");
+      toast.error("Network error");
     }
   };
 
@@ -116,27 +117,27 @@ const Profile = () => {
         headers: { token }
       });
       if (res.ok) {
-        alert("Account deleted");
+        toast.success("Account deleted");
         localStorage.removeItem("loginToken");
         localStorage.removeItem("userId");
         navigate("/");
         window.location.reload();
       } else {
         const d = await res.json().catch(()=>({}));
-        alert(d.error || d.message || "Delete failed");
+        toast(d.error || d.message || "Delete failed");
       }
     } catch (err) {
       console.error("deleteAccount err", err);
-      alert("Network error");
+      toast.error("Network error");
     }
   };
 
   if (loadingProfile) return <div style={{ padding: 20, color: "#fff" }}>Loading profile...</div>;
 
   if (!user) return (
-    <div style={{ padding: 20, color: "#fff" }}>
-      <h2>You are not logged in</h2>
-      <button onClick={() => navigate("/")}>Go Home</button>
+    <div style={{ padding: 20, color: "#000000ff" }}>
+      <h2 className="profh2">You are not logged in</h2>
+      <button className="profbtn" onClick={() => navigate("/")}>Go Home</button>
     </div>
   );
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../data/ApiPath";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const YourAccounts = () => {
   const [posts, setPosts] = useState([]);
@@ -25,7 +26,7 @@ const YourAccounts = () => {
 
   const deletePost = async (postId) => {
     const token = localStorage.getItem("loginToken");
-    if (!token) { alert("Please login"); return; }
+    if (!token) { toast("Please login"); return; }
     const ok = confirm("Are you sure want to delete this post?");
     if (!ok) return;
     const previous = posts;
@@ -39,13 +40,14 @@ const YourAccounts = () => {
       if (!res.ok) {
         setPosts(previous);
         console.error("Delete failed:", data);
-        alert(data.message || data.error || "Delete failed");
+        toast(data.message || data.error || "Delete failed");
         return;
       }
+      toast.success("deleted")
     } catch (err) {
       setPosts(previous);
       console.error(err);
-      alert("Network error. Try again.");
+      toast("Network error. Try again.");
     }
   };
 
@@ -61,11 +63,9 @@ const YourAccounts = () => {
 
   return (
     <div className="your-accounts-page" style={{ padding: 20 }}>
+      <button className="back-btn" onClick={() => navigate("/")}>←</button>
       <div className="your-accounts-header">
         <h2>Your Accounts</h2>
-        <button className="go-home-btn" onClick={() => navigate("/")}>
-          Go Home
-        </button>
       </div>
 
       {posts.length === 0 ? (

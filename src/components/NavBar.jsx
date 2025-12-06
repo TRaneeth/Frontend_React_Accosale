@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { FaComments, FaBell, FaHeart, FaSearch, FaBars } from "react-icons/fa";
+import { FaComments, FaHeart, FaSearch, FaBars } from "react-icons/fa";
 import logo from "../assets/accosale-logoW.png";
 import { API_URL } from '../data/ApiPath';
 
-const NavBar = ({ showLoginHandler, showLogout, logoutHandler, onSearch }) => {
+const NavBar = ({ showLoginHandler, showLogout, logoutHandler, onSearch, submenuHandler }) => {
   const navigate = useNavigate();
   const [unread, setUnread] = useState(0);
 
@@ -36,16 +36,20 @@ const NavBar = ({ showLoginHandler, showLogout, logoutHandler, onSearch }) => {
     const iv = setInterval(loadUnread, 4000);
     window.addEventListener("refreshChats", loadUnread);
     window.addEventListener("userLoggedIn", loadUnread);
-    return () => { clearInterval(iv); window.removeEventListener("refreshChats", loadUnread); window.removeEventListener("userLoggedIn", loadUnread); };
-    // eslint-disable-next-line
+    return () => { 
+      clearInterval(iv); 
+      window.removeEventListener("refreshChats", loadUnread); 
+      window.removeEventListener("userLoggedIn", loadUnread); 
+    };
   }, []);
 
   return (
     <>
+      {/* DESKTOP NAV */}
       <div className="navSection">
         <div className="logo">
-          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-            <img src={logo} className="logo-png" />
+          <Link to="/" style={{ textDecoration: "none", color: "#006494" }}>
+            Accosale.com
           </Link>
         </div>
 
@@ -59,7 +63,8 @@ const NavBar = ({ showLoginHandler, showLogout, logoutHandler, onSearch }) => {
             <FaSearch className="search-icon" />
           </div>
 
-          <div style={{ position: "relative", cursor: "pointer", marginRight: 10 }} onClick={() => navigate("/chat")}>
+          <div style={{ position: "relative", cursor: "pointer", marginRight: 10 }} 
+               onClick={() => navigate("/chat")}>
             <FaComments className="text-xl" />
             {unread > 0 && (
               <div style={{
@@ -83,8 +88,6 @@ const NavBar = ({ showLoginHandler, showLogout, logoutHandler, onSearch }) => {
             )}
           </div>
 
-
-          {/* wishlist icon */}
           <div style={{ cursor: "pointer" }} onClick={goWishlist}>
             <FaHeart className="text-xl" />
           </div>
@@ -97,12 +100,62 @@ const NavBar = ({ showLoginHandler, showLogout, logoutHandler, onSearch }) => {
         </div>
       </div>
 
+      {/* MOBILE NAV */}
       <div className="smallNav">
-        <FaBars className="submenu" />
-        <div className="mobile-logo">
-          <Link to="/" style={{ color: "white" }}>ACCOSALE</Link>
+        <div className="snname">Accosale.com</div>
+
+        <div className="smnav">
+          <div className="sbmn" onClick={submenuHandler}>
+            <FaBars className="submenu" />
+          </div>
+
+          <div style={{ position: "relative", cursor: "pointer", marginRight: 10 }} 
+               onClick={() => navigate("/chat")}>
+            <FaComments className="text-xl" />
+            {unread > 0 && (
+              <div style={{
+                position: "absolute",
+                top: -6,
+                right: -8,
+                background: "red",
+                color: "white",
+                minWidth: 18,
+                height: 18,
+                padding: "0 4px",
+                borderRadius: 18,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 12,
+                fontWeight: 700
+              }}>
+                {unread > 99 ? "99+" : unread}
+              </div>
+            )}
+          </div>
+
+          <div style={{ cursor: "pointer" }} onClick={goWishlist}>
+            <FaHeart className="text-xl" />
+          </div>
+
+          <div className="logbtns">
+            {!showLogout ? (
+              <button className="login-button" onClick={showLoginHandler}>Login</button>
+            ) : (
+              <button className="logout-button" onClick={logoutHandler}>Logout</button>
+            )}
+          </div>
         </div>
-        <FaSearch className="mobile-search" />
+
+        <div className="mobileSearch">
+          <div className="search-bar">
+            <input 
+              type="text" 
+              placeholder="Search..." 
+              onChange={(e) => onSearch && onSearch(e.target.value)}
+            />
+          </div>
+        </div>
       </div>
     </>
   );

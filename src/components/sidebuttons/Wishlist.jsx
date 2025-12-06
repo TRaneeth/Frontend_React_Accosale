@@ -15,18 +15,17 @@ const Wishlist = () => {
   // Remove from wishlist
   const removeItem = (id) => {
     const updated = wishlist.filter((item) => item._id !== id);
+    toast.success('removed')
     localStorage.setItem("wishlist", JSON.stringify(updated));
     setWishlist(updated); // refresh UI
   };
 
   return (
     <div className="your-accounts-page">
-
+      <button className="back-btn" onClick={() => nav(-1)}>←</button>
       <div className="your-accounts-header">
+        
         <h2>Wishlist</h2>
-        <button className="go-home-btn" onClick={() => nav('/')}>
-          Go Home
-        </button>
       </div>
 
       <div className="accounts-list">
@@ -43,7 +42,7 @@ const Wishlist = () => {
               {/* Info Section */}
               <div className="account-info">
                 <h4>{item.type}</h4>
-                <p>@{item.id}</p>
+                <p>{item.id}</p>
 
                 <p>
                   {item.category?.[0]} : {item.selectedCategory}

@@ -10,9 +10,9 @@ import AddProduct from '../components/forms/AddProduct';
 import Info from '../components/sidebuttons/Info';
 import Help from '../components/sidebuttons/Help';
 import YourAccounts from '../components/YourAccounts';
-import { TbFlagSearch } from 'react-icons/tb';
-import { API_URL } from '../data/ApiPath';   
+import { API_URL } from '../data/ApiPath';
 import Wishlist from '../components/sidebuttons/Wishlist';
+import SideDrawer from '../components/sidebuttons/SideDrawer';
 
 const LandingPage = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -22,18 +22,17 @@ const LandingPage = () => {
   const [showInfoButton, setShowInfoButton] = useState(false);
   const [showHelpButton, setShowHelpButton] = useState(false);
   const [showYourAccounts, setShowYourAccounts] = useState(false);
-  const [searchText,setSearchText] = useState("");
-  const [showWishlist,setShowWishlist] = useState(false)
+  const [searchText, setSearchText] = useState("");
+  const [showWishlist, setShowWishlist] = useState(false);
+  const [showSubmenu, setShowSubmenu] = useState(false);
 
-  // Check login on page load
+  // Load login state
   useEffect(() => {
     const loginToken = localStorage.getItem('loginToken');
-    if (loginToken) {
-      setShowLogout(true);
-    }
+    if (loginToken) setShowLogout(true);
   }, []);
 
-  // Warm up backend (only needed for Render servers)
+  // Warmup backend
   useEffect(() => {
     fetch(`${API_URL}/`);
   }, []);
@@ -54,7 +53,7 @@ const LandingPage = () => {
     }
   };
 
-  // Show login popup
+  // Login popup
   const showLoginHandler = () => {
     setShowLogin(true);
     setShowRegister(false);
@@ -63,7 +62,7 @@ const LandingPage = () => {
     setShowHelpButton(false);
   };
 
-  // Show register popup
+  // Register popup
   const showRegisterHandler = () => {
     setShowRegister(true);
     setShowLogin(false);
@@ -72,7 +71,7 @@ const LandingPage = () => {
     setShowHelpButton(false);
   };
 
-  // Show add-product popup
+  // Add Product popup
   const showAddProductHandler = () => {
     if (showLogout) {
       setShowAddProduct(true);
@@ -92,39 +91,80 @@ const LandingPage = () => {
     setShowRegister(false);
     setShowAddProduct(false);
     setShowYourAccounts(false);
+    setShowSubmenu(false);   // IMPORTANT FIX
   };
 
-  // Show Your Accounts modal
+  // Show user accounts
   const yourAccountsHandler = () => {
-  const token = localStorage.getItem('loginToken');
-  if (!token) { 
-    alert('Please login'); 
-    setShowLogin(true); 
-    return; 
-  } 
-  setShowYourAccounts(true);
-};
+    const token = localStorage.getItem('loginToken');
+    if (!token) {
+      alert('Please login');
+      setShowLogin(true);
+      return;
+    }
+    setShowYourAccounts(true);
+  };
 
+  // **MAIN FIX** — submenu open
+  const submenuHandler = () => {
+    setShowSubmenu(true);
+  };
 
   return (
     <>
       <section className='landingSection'>
-        
-        <NavBar showLoginHandler={showLoginHandler} showLogout={showLogout} logoutHandler={logoutHandler}
-          onSearch={(txt) => setSearchText(txt)}/>
-        <SideBar showAddProductHandler={showAddProductHandler}  logoutHandler={logoutHandler}/>
-        <Intro showAddProductHandler={showAddProductHandler} yourAccountsHandler={yourAccountsHandler}/>
-        <Menu search={searchText}/>
-        {showLogin && (<Login showRegisterHandler={showRegisterHandler} onClose={closeAllHandler}/>)}
-        {showRegister && (<Register showLoginHandler={showLoginHandler} onClose={closeAllHandler}/>)}
+
+        <NavBar 
+          showLoginHandler={showLoginHandler} 
+          showLogout={showLogout} 
+          logoutHandler={logoutHandler}
+          onSearch={(txt) => setSearchText(txt)}
+          submenuHandler={submenuHandler}   // IMPORTANT FIX
+        />
+
+        <SideBar 
+          showAddProductHandler={showAddProductHandler}  
+          logoutHandler={logoutHandler}
+        />
+
+        <Intro 
+          showAddProductHandler={showAddProductHandler} 
+          yourAccountsHandler={yourAccountsHandler}
+        />
+
+        <Menu search={searchText} />
+
+        {showLogin && (
+          <Login showRegisterHandler={showRegisterHandler} onClose={closeAllHandler} />
+        )}
+
+        {showRegister && (
+          <Register showLoginHandler={showLoginHandler} onClose={closeAllHandler} />
+        )}
+
         {showAddProduct && showLogout && (
-          <AddProduct onClose={closeAllHandler} onPostSuccess={() => setShowYourAccounts(true)} />)}
+          <AddProduct 
+            onClose={closeAllHandler} 
+            onPostSuccess={() => setShowYourAccounts(true)} 
+          />
+        )}
 
         {showInfoButton && <Info />}
         {showHelpButton && <Help />}
-        {showWishlist && <Wishlist/>}
+        {showWishlist && <Wishlist />}
 
-        {showYourAccounts && (<YourAccounts onClose={() => setShowYourAccounts(false)} />)}
+        {showYourAccounts && (
+          <YourAccounts onClose={() => setShowYourAccounts(false)} />
+        )}
+
+        {/* DRAWER — FIXED */}
+        <SideDrawer
+  open={showSubmenu}
+  onClose={() => setShowSubmenu(false)}
+  showAddProductHandler={showAddProductHandler}
+  logoutHandler={logoutHandler}
+/>
+
 
       </section>
     </>

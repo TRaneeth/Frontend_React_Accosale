@@ -8,7 +8,7 @@ const Help = () => {
     <div className="route-page">   
       <div className="page-header">
         <h2>Help & Support</h2>
-        <button className="small-btn" onClick={() => nav(-1)}>Go Back</button>
+        <button className="small-btn" onClick={() => nav(-1)}>←</button>
       </div>
       <div className="page-content">
         <h3>Popular Questions</h3>

@@ -36,9 +36,9 @@ const Login = ({showRegisterHandler,onClose}) => {
     }
   }
   return (
-    <div className="loginSection" onSubmit={loginHandler}>
-        <form className='authForm'>
-            <button className="close-btn" onClick={onClose}>×</button>
+    <div className="loginSection" >
+        <form className='authForm' onSubmit={loginHandler}>
+            <button className="close-btn" type="button" onClick={onClose}>×</button>
             <h2>Login</h2>
             <input type="text" name='email' value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Username or Email"></input>
             <input type="password" name='password' value={password} onChange  ={(e)=>setPassword(e.target.value)} placeholder="Password"></input><br/>

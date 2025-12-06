@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { API_URL } from "../../data/ApiPath";
+import toast from "react-hot-toast";
 
 const EditPost = () => {
   const { id: postId } = useParams(); // actual post _id (URL)
@@ -58,7 +59,7 @@ const EditPost = () => {
       const data = await res.json();
       setLoading(false);
       if (res.ok) {
-        alert("Post updated");
+        toast.success("Post updated");
         window.dispatchEvent(new Event("refreshChats"));
         navigate("/youraccounts");
       } else {

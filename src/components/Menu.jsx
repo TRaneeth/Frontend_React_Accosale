@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import AccountCard from './AccountCard';
+import AccountCard from './Accountcard';
 import { API_URL } from '../data/ApiPath';
 
 const FALLBACK_IMAGE = '/mnt/data/carddddd.jpg';
